@@ -15,18 +15,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp" >
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+            android:layout_marginTop="226dp"
             android:text="@string/empty"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#A4C639" />
@@ -35,22 +39,23 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_below="@+id/textView1"
+            android:layout_alignParentLeft="true"
             android:layout_marginTop="23dp"
             android:text="@string/input_label"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#0099FF" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/taskDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView2"
             android:layout_toRightOf="@+id/textView2"
             android:background="#CCCCCC"
             android:ems="10"
-            android:inputType="textPersonName" >
+            android:hint="Enter task description"
+            android:inputType="text">
 
             <requestFocus />
         </EditText>
@@ -59,12 +64,19 @@
             android:id="@+id/button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_below="@+id/textView2"
+            android:layout_alignParentLeft="true"
             android:layout_marginTop="20dp"
             android:background="#0099FF"
             android:text="@string/sub"
             android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/message2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
 
     </RelativeLayout>
 
