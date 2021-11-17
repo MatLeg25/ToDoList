@@ -9,6 +9,8 @@ import android.widget.Toast
 
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         addNewActButton.setOnClickListener {
             val Intent = Intent(this, AddNewTask::class.java)
             startActivity(Intent)
+
         }
 
 

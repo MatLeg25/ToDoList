@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "361637057400",
+    "firebase_url": "https://todolist-6eef6-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "todolist-6eef6",
     "storage_bucket": "todolist-6eef6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:361637057400:android:0a458fd4ca96f8d2ab2e8d",
+        "mobilesdk_app_id": "1:361637057400:android:9147f5ee836ee3c7ab2e8d",
         "android_client_info": {
           "package_name": "com.example.todolist"
         }
