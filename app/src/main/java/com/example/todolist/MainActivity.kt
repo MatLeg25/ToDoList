@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
 
                 val value = snapshot.getValue<String>()
-                Log.d(TAG, "Value is: " + value)
+                Log.d(TAG, "Value is: $value")
             }
 
             override fun onCancelled(error: DatabaseError) {
