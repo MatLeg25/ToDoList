@@ -1,25 +1,19 @@
 package com.example.todolist
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 
-import android.view.ViewGroup
 import android.widget.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
     private var database = FirebaseDatabase.getInstance().getReference("tasks")
+    private var emptyListMsg = "No task on your list"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,22 +21,24 @@ class MainActivity : AppCompatActivity() {
 
         val listDisplay = findViewById<TextView>(R.id.listView)
 
-
         // Read list of tasks
-        database.addValueEventListener(object : ValueEventListener{
+        database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var lista = StringBuilder()
-                var counter = 0;
-                for(i in dataSnapshot.children) {
+                var listTask = StringBuilder()
+                var counter = 0
+                for (i in dataSnapshot.children) {
                     counter++
                     var description = i.child("description").getValue()
                     var id = i.child("id").getValue()
-                    //lista.append("${i.key} $description $id ")
-                    lista.append("$counter $description \n\n")
+                    listTask.append("$counter. $description \n\n")
                 }
 
-                //overwrite TextView in AddNewTask layout
-                listDisplay.text = lista
+                //overwrite TextView in activity_main layout
+                if(counter < 1) {
+                    listDisplay.text = emptyListMsg
+                } else {
+                    listDisplay.text = listTask
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -61,3 +57,8 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+//TODO 1. Refactor - code (structure, data flow, code duplications)
+//TODO 2. Refactor - layouts (data flow, components reuses)
+//TODO 3. To be implemented full CRUD
+//TODO 4. Visual improvements
