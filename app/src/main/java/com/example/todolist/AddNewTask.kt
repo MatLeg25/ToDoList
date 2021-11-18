@@ -2,14 +2,11 @@ package com.example.todolist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 
 class AddNewTask : AppCompatActivity() {
 
@@ -23,35 +20,34 @@ class AddNewTask : AppCompatActivity() {
         val newTask = findViewById<EditText>(R.id.taskDescription)
         val message = "New task has been added! "
         val submitButton = findViewById<Button>(R.id.button_submit)
-        val listaDisplay = findViewById<TextView>(R.id.listView)
-
+        val listDisplay = findViewById<TextView>(R.id.listView)
 
         //show confirmation after add new task
         submitButton.setOnClickListener {
             val description: String = newTask.text.toString()
             Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
 
-
-        // Write a message to the database
-        val taskId = database.push().key
-        val task = Task(taskId, "user1", description)
-        database.child("$taskId").setValue(task)
+            // Write a task to the database
+            val taskId = database.push().key
+            val task = Task(taskId, "user1", description)
+            database.child("$taskId").setValue(task)
     }
 
-
+        // Read list of tasks
         database.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var lista = StringBuilder()
+                var counter = 0;
                 for(i in dataSnapshot.children) {
+                    counter++
                     var description = i.child("description").getValue()
                     var id = i.child("id").getValue()
                     //lista.append("${i.key} $description $id ")
-                    lista.append("$description \n")
+                    lista.append("$counter $description \n\n")
                 }
 
-                //overwrite TextView in AddNewTask
-                listaDisplay.text = lista
-
+                //overwrite TextView in AddNewTask layout
+                listDisplay.text = lista
             }
 
             override fun onCancelled(error: DatabaseError) {

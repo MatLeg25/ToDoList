@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
@@ -18,76 +19,45 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
-    var array = arrayOf("Task1", "Task2", "Task3", "Task4", "Task5")
-    private lateinit var listOfItems: ArrayList<Task>
+    private var database = FirebaseDatabase.getInstance().getReference("tasks")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        val adapter = ArrayAdapter(this,
-            R.layout.listview_item, array)
-
-        val listView:ListView = findViewById(R.id.listview_1)
-        listView.adapter = adapter
-
-        val addNewActButton = findViewById<Button>(R.id.btn_add_task)
-        addNewActButton.setOnClickListener {
-            val Intent = Intent(this, AddNewTask::class.java)
-            startActivity(Intent)
-
-        }
+        val listDisplay = findViewById<TextView>(R.id.listView)
 
 
-
-        // Write a message to the database
-        val database = Firebase.database
-        val myRef = database.getReference("message")
-
-        myRef.setValue("Hello, World!")
-
-
-        // Read from the database
-        myRef.addValueEventListener(object: ValueEventListener {
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-
-                listOfItems = ArrayList()
-                for(i in snapshot.children) {
-                    val newRow = i.getValue(Task::class.java)
-                    listOfItems.add(newRow!!)
+        // Read list of tasks
+        database.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var lista = StringBuilder()
+                var counter = 0;
+                for(i in dataSnapshot.children) {
+                    counter++
+                    var description = i.child("description").getValue()
+                    var id = i.child("id").getValue()
+                    //lista.append("${i.key} $description $id ")
+                    lista.append("$counter $description \n\n")
                 }
-                setupAdapter(listOfItems)
 
-
-
-
-                val value = snapshot.getValue<String>()
-                Log.d(TAG, "Value is: $value")
+                //overwrite TextView in AddNewTask layout
+                listDisplay.text = lista
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.w(TAG, "Failed to read value.", error.toException())
+                TODO("Not yet implemented")
             }
 
         })
 
 
-
-
+        val addNewActButton = findViewById<Button>(R.id.btn_add_task)
+        addNewActButton.setOnClickListener {
+            val intent = Intent(this, AddNewTask::class.java)
+            startActivity(intent)
+        }
     }
 
-
-    private fun setupAdapter(arrayData: ArrayList<Task>) {
-
-        val adapter = ArrayAdapter(this,
-            R.layout.listview_item, array)
-
-        val listView:ListView = findViewById(R.id.listview_1)
-        listView.adapter = adapter
-    }
 
 }

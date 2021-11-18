@@ -25,21 +25,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="226dp"
-            android:text="@string/empty"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#A4C639" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/new_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView1"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="23dp"
             android:text="@string/input_label"
@@ -50,13 +40,12 @@
             android:id="@+id/taskDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textView2"
-            android:layout_toRightOf="@+id/textView2"
+            android:layout_alignBottom="@+id/new_task"
+            android:layout_toRightOf="@+id/new_task"
             android:background="#CCCCCC"
             android:ems="10"
             android:hint="Enter task description"
             android:inputType="text">
-
             <requestFocus />
         </EditText>
 
@@ -64,8 +53,8 @@
             android:id="@+id/button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView2"
-            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/new_task"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="20dp"
             android:background="#0099FF"
             android:text="@string/sub"
@@ -76,8 +65,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:layout_below="@+id/button_submit"
             android:layout_marginLeft="100dp"
-            android:text="TextView" />
+            android:textColor="#4906BF"
+            android:textSize="18dp"
+            android:text="No task on your list" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_margin="10dp"
+            android:background="?android:attr/listDivider"
+            android:layout_below="@+id/button_submit" />
 
 
     </RelativeLayout>
