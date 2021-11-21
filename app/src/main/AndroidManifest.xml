@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoList">
         <activity
-            android:name=".viewmodel.AddNewTaskViewModel"
+            android:name=".AddNewTaskActivity"
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"

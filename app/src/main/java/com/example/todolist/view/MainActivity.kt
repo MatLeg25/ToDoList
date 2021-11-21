@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-//TODO 1. Refactor - code (structure, data flow, code duplications)
+//TODO 1. FIX MVVM implementation
 //TODO 2. Refactor - layouts (data flow, components reuses)
 //TODO 3. To be implemented full CRUD
 //TODO 4. Visual improvements

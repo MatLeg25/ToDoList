@@ -10,32 +10,17 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class TaskRepoImpl(
 
-    private var databaseF: DatabaseReference = FirebaseDatabase.getInstance().getReference("tasks"),
-    //val database: FirebaseFirestore = FirebaseFirestore.getInstance(),
-
 ) : ITaskRepository {
     override suspend fun getTaskById(taskId: String): List<Task> {
         TODO("Not yet implemented")
     }
 
     override suspend fun saveTask(description: String): String {
-        val taskId = databaseF.push().key
-        val task = Task(taskId, "user1", description)
-        databaseF.child("$taskId").setValue(task)
-        return "ADDED"
+        TODO("Not yet implemented")
     }
 
     override suspend fun getTasks(dataSnapshot: DataSnapshot): String {
-        var listTask = StringBuilder()
-        var counter = 0;
-        for (i in dataSnapshot.children) {
-            counter++
-            var description = i.child("description").getValue()
-            var id = i.child("id").getValue()
-            //listTask.append("${i.key} $description $id ")
-            listTask.append("$counter. $description \n\n")
-        }
-        return listTask.toString()
+        TODO("Not yet implemented")
     }
 
     override suspend fun deleteTask(task: Task): List<Task> {
@@ -49,18 +34,18 @@ class TaskRepoImpl(
 
     fun getTaskData(): LiveData<MutableList<Task>> {
         val mutableData = MutableLiveData<MutableList<Task>>()
-//        FirebaseFirestore.getInstance().collection("Tasks").get().addOnSuccessListener {result ->
-//            val listData = mutableListOf<Task>()
-//            for(task in result) {
-//                val id = "X"//task.getString("id")
-//                val description = task.getString("description")
-//                val username = task.getString("username")
-//                val task = Task(id!!, username!!, description!!)
-//                //listData.add(task)
-//            }
-//
-//            mutableData.value = listData
-//        }
+        FirebaseFirestore.getInstance().collection("Tasks").get().addOnSuccessListener {result ->
+            val listData = mutableListOf<Task>()
+            for(document in result) {
+                val id = document.getString("id")
+                val description = document.getString("description")
+                val username = document.getString("username")
+                val task = Task(id!!, username!!, description!!)
+                listData.add(task)
+            }
+
+            mutableData.value = listData
+        }
 
         return mutableData
     }

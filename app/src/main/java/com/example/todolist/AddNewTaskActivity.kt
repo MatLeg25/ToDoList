@@ -1,4 +1,4 @@
-package com.example.todolist.viewmodel
+package com.example.todolist
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,11 +7,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.example.todolist.R
 import com.example.todolist.view.MainActivity
 import com.google.firebase.database.*
 
-class AddNewTaskViewModel : AppCompatActivity() {
+class AddNewTaskActivity : AppCompatActivity() {
+
+
+    //TODO refactor this class to work with MainActivity in MVVM
+
 
     private var database = FirebaseDatabase.getInstance().getReference("tasks")
 
@@ -23,7 +26,7 @@ class AddNewTaskViewModel : AppCompatActivity() {
         val newTask = findViewById<EditText>(R.id.taskDescription)
         val message = "New task has been added! "
         val submitButton = findViewById<Button>(R.id.button_submit)
-        val listDisplay = findViewById<TextView>(R.id.listView)
+        //val listDisplay = findViewById<TextView>(R.id.listView)
 
         //show confirmation after add new task
         submitButton.setOnClickListener {
@@ -41,18 +44,18 @@ class AddNewTaskViewModel : AppCompatActivity() {
         // Read list of tasks
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                var listTask = StringBuilder()
-//                var counter = 0;
-//                for (i in dataSnapshot.children) {
-//                    counter++
-//                    var description = i.child("description").getValue()
-//                    var id = i.child("id").getValue()
-//                    //listTask.append("${i.key} $description $id ")
-//                    listTask.append("$counter. $description \n\n")
-//                }
-//
-//                //overwrite TextView in AddNewTask layout
-//                listDisplay.text = listTask //TODO read froim db
+                var listTask = StringBuilder()
+                var counter = 0;
+                for (i in dataSnapshot.children) {
+                    counter++
+                    var description = i.child("description").getValue()
+                    var id = i.child("id").getValue()
+                    //listTask.append("${i.key} $description $id ")
+                    listTask.append("$counter. $description \n\n")
+                }
+
+                //overwrite TextView in AddNewTask layout
+                //listDisplay.text = listTask
             }
 
             override fun onCancelled(error: DatabaseError) {
