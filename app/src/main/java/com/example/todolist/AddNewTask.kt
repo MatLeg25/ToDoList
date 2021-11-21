@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.todolist.model.Task
 import com.google.firebase.database.*
 
 class AddNewTask : AppCompatActivity() {
@@ -28,28 +29,29 @@ class AddNewTask : AppCompatActivity() {
             val description: String = newTask.text.toString()
             Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
 
-            // Write a task to the database
-            val taskId = database.push().key
-            val task = Task(taskId, "user1", description)
-            database.child("$taskId").setValue(task)
+            //TODO zapis
+//            // Write a task to the database
+//            val taskId = database.push().key
+//            val task = Task(taskId, "user1", description)
+//            database.child("$taskId").setValue(task)
         }
 
 
         // Read list of tasks
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var listTask = StringBuilder()
-                var counter = 0;
-                for (i in dataSnapshot.children) {
-                    counter++
-                    var description = i.child("description").getValue()
-                    var id = i.child("id").getValue()
-                    //listTask.append("${i.key} $description $id ")
-                    listTask.append("$counter. $description \n\n")
-                }
-
-                //overwrite TextView in AddNewTask layout
-                listDisplay.text = listTask
+//                var listTask = StringBuilder()
+//                var counter = 0;
+//                for (i in dataSnapshot.children) {
+//                    counter++
+//                    var description = i.child("description").getValue()
+//                    var id = i.child("id").getValue()
+//                    //listTask.append("${i.key} $description $id ")
+//                    listTask.append("$counter. $description \n\n")
+//                }
+//
+//                //overwrite TextView in AddNewTask layout
+//                listDisplay.text = listTask //TODO odczyt
             }
 
             override fun onCancelled(error: DatabaseError) {

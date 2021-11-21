@@ -5,58 +5,44 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.todolist.model.Task
+import com.example.todolist.viewmodel.FirebaseViewModel
+import com.example.todolist.viewmodel.MainViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import 	androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
-    private var database = FirebaseDatabase.getInstance().getReference("tasks")
-    private var emptyListMsg = "No task on your list"
+    private lateinit var adapter:MainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val listDisplay = findViewById<TextView>(R.id.listView)
+        adapter = MainAdapter(this)
 
-        // Read list of tasks
-        database.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var listTask = StringBuilder()
-                var counter = 0
-                for (i in dataSnapshot.children) {
-                    counter++
-                    var description = i.child("description").getValue()
-                    var id = i.child("id").getValue()
-                    listTask.append("$counter. $description \n\n")
-                }
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = MainAdapter(this)
 
-                //overwrite TextView in activity_main layout
-                if(counter < 1) {
-                    listDisplay.text = emptyListMsg
-                } else {
-                    listDisplay.text = listTask
-                }
-            }
+        val testList = mutableListOf<Task>()
+        testList.add(Task("123456","user0","zadanie1"))
+        testList.add(Task("123456","user0","zadanie2"))
+        testList.add(Task("123456","user0","zadanie3"))
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
+        adapter.setListData(testList)
+        adapter.notifyDataSetChanged()
 
-        })
-
-
-        val addNewActButton = findViewById<Button>(R.id.btn_add_task)
-        addNewActButton.setOnClickListener {
-            val intent = Intent(this, AddNewTask::class.java)
-            startActivity(intent)
-        }
     }
 
 
 }
+
+
+
 
 //TODO 1. Refactor - code (structure, data flow, code duplications)
 //TODO 2. Refactor - layouts (data flow, components reuses)
