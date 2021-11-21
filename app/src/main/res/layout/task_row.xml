@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:hint="Task"
         android:textAlignment="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="TEXT123"/>
 
     </LinearLayout>
 

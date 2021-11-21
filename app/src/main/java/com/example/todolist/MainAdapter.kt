@@ -4,8 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.todolist.model.Task
+
 
 class MainAdapter(private val context: Context): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
@@ -34,7 +37,10 @@ class MainAdapter(private val context: Context): RecyclerView.Adapter<MainAdapte
 
     inner class MainViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         fun bindView(task: Task) {
-            itemView.txt_desc.text = task.description
+            Glide.with(context).load(task.description).into(itemView.findViewById(R.id.txt_desc))
+            //itemView.txt_desc.text = task.description
+            //itemView.findViewById<TextView>(R.id.txt_desc).text = task.description
+
         }
     }
 

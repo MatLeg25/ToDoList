@@ -4,12 +4,12 @@ import com.example.todolist.model.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.FirebaseFirestore
+//import com.google.firebase.firestore.FirebaseFirestore
 
 class TaskRepoImpl(
 
     private var databaseF: DatabaseReference = FirebaseDatabase.getInstance().getReference("tasks"),
-    val database: FirebaseFirestore = FirebaseFirestore.getInstance(),
+    //val database: FirebaseFirestore = FirebaseFirestore.getInstance(),
 
 ) : ITaskRepository {
     override suspend fun getTaskById(taskId: String): List<Task> {

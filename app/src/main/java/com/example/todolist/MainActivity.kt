@@ -19,14 +19,19 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter:MainAdapter
 
+    val listDisplay = findViewById<TextView>(R.id.listView)
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         adapter = MainAdapter(this)
+        val recyclerview = findViewById<RecyclerView>(R.id.recyclerView)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = MainAdapter(this)
+
+        recyclerview.layoutManager = LinearLayoutManager(this)
+        recyclerview.adapter = MainAdapter(this)
 
         val testList = mutableListOf<Task>()
         testList.add(Task("123456","user0","zadanie1"))
