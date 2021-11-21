@@ -4,22 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
-
-    <TextView
-        android:id="@+id/listView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/listTitle"
-        android:layout_marginTop="50dp"
-        android:text="No task on your list"
-        android:textColor="#4906BF"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listTitle" />
 
     <TextView
         android:id="@+id/listTitle"
@@ -43,11 +29,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/listTitle" />
 
+<!--    <TextView-->
+<!--        android:id="@+id/listView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/listTitle"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:text="No task on your list"-->
+<!--        android:textColor="#4906BF"-->
+<!--        android:textSize="18dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.498"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/listTitle" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/task_row"/>
+        android:layout_below="@+id/listTitle"
+        android:textAlignment="center"
+        android:layout_marginTop="150dp"
+        tools:listitem="@layout/task_row" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

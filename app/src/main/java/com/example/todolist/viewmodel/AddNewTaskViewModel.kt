@@ -1,4 +1,4 @@
-package com.example.todolist
+package com.example.todolist.viewmodel
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,10 +7,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.example.todolist.model.Task
+import com.example.todolist.R
+import com.example.todolist.view.MainActivity
 import com.google.firebase.database.*
 
-class AddNewTask : AppCompatActivity() {
+class AddNewTaskViewModel : AppCompatActivity() {
 
     private var database = FirebaseDatabase.getInstance().getReference("tasks")
 
@@ -29,7 +30,7 @@ class AddNewTask : AppCompatActivity() {
             val description: String = newTask.text.toString()
             Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
 
-            //TODO zapis
+            //TODO add new task
 //            // Write a task to the database
 //            val taskId = database.push().key
 //            val task = Task(taskId, "user1", description)
@@ -51,7 +52,7 @@ class AddNewTask : AppCompatActivity() {
 //                }
 //
 //                //overwrite TextView in AddNewTask layout
-//                listDisplay.text = listTask //TODO odczyt
+//                listDisplay.text = listTask //TODO read froim db
             }
 
             override fun onCancelled(error: DatabaseError) {

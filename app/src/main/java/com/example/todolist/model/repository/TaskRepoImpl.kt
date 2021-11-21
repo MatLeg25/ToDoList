@@ -1,10 +1,12 @@
 package com.example.todolist.model.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.todolist.model.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-//import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestore
 
 class TaskRepoImpl(
 
@@ -42,6 +44,25 @@ class TaskRepoImpl(
 
     override suspend fun updateTask(task: Task): List<Task> {
         TODO("Not yet implemented")
+    }
+
+
+    fun getTaskData(): LiveData<MutableList<Task>> {
+        val mutableData = MutableLiveData<MutableList<Task>>()
+//        FirebaseFirestore.getInstance().collection("Tasks").get().addOnSuccessListener {result ->
+//            val listData = mutableListOf<Task>()
+//            for(task in result) {
+//                val id = "X"//task.getString("id")
+//                val description = task.getString("description")
+//                val username = task.getString("username")
+//                val task = Task(id!!, username!!, description!!)
+//                //listData.add(task)
+//            }
+//
+//            mutableData.value = listData
+//        }
+
+        return mutableData
     }
 
 }

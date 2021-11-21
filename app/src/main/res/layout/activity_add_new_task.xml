@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddNewTask">
+    tools:context=".viewmodel.AddNewTaskViewModel">
 
 
     <TextView
@@ -95,16 +95,25 @@
 <!--            android:textColor="#FFFFFF" />-->
 
 
-        <TextView
-            android:id="@+id/listView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+<!--        <TextView-->
+<!--            android:id="@+id/listView"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:layout_below="@+id/button_submit"-->
+<!--            android:layout_marginLeft="100dp"-->
+<!--            android:textColor="#4906BF"-->
+<!--            android:textSize="18dp"-->
+<!--            android:text="No task on your list" />-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_below="@+id/button_submit"
-            android:layout_marginLeft="100dp"
-            android:textColor="#4906BF"
-            android:textSize="18dp"
-            android:text="No task on your list" />
+            android:textAlignment="center"
+            android:padding="20dp"
+            tools:listitem="@layout/task_row" />
 
         <View
             android:id="@+id/divider"

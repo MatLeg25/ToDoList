@@ -1,23 +1,20 @@
-package com.example.todolist
+package com.example.todolist.view
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
 
-import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.todolist.model.Task
-import com.example.todolist.viewmodel.FirebaseViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.todolist.viewmodel.MainViewModel
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import 	androidx.recyclerview.widget.RecyclerView
+import com.example.todolist.MainAdapter
+import com.example.todolist.R
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var adapter:MainAdapter
+    private lateinit var adapter: MainAdapter
+    private val viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,24 +22,20 @@ class MainActivity : AppCompatActivity() {
 
         adapter = MainAdapter(this)
         val recyclerview = findViewById<RecyclerView>(R.id.recyclerView)
-
-
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = adapter
-
-        val testList = mutableListOf<Task>()
-        testList.add(Task("123456","user0","zadanie1"))
-        testList.add(Task("123456","user0","zadanie2"))
-        testList.add(Task("123456","user0","zadanie3"))
-
-        adapter.setListData(testList)
-        adapter.notifyDataSetChanged()
-
+        observeData()
     }
 
 
-}
+    fun observeData() {
+        viewModel.fetchTaskData().observe(this, Observer {
+            adapter.setListData(it)
+            adapter.notifyDataSetChanged()
+        })
+    }
 
+}
 
 
 
