@@ -37,9 +37,9 @@ class MainAdapter(private val context: Context): RecyclerView.Adapter<MainAdapte
 
     inner class MainViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         fun bindView(task: Task) {
-            Glide.with(context).load(task.description).into(itemView.findViewById(R.id.txt_desc))
+            //Glide.with(context).load(task.description).into(itemView.findViewById(R.id.txt_desc))
             //itemView.txt_desc.text = task.description
-            //itemView.findViewById<TextView>(R.id.txt_desc).text = task.description
+            itemView.findViewById<TextView>(R.id.txt_desc).text = task.description
 
         }
     }

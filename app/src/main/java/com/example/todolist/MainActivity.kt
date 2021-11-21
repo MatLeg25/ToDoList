@@ -19,9 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter:MainAdapter
 
-    val listDisplay = findViewById<TextView>(R.id.listView)
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
 
         recyclerview.layoutManager = LinearLayoutManager(this)
-        recyclerview.adapter = MainAdapter(this)
+        recyclerview.adapter = adapter
 
         val testList = mutableListOf<Task>()
         testList.add(Task("123456","user0","zadanie1"))
